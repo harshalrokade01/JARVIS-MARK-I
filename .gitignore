@@ -1,0 +1,31 @@
+#.gitignore kya hai?
+#Ye Git ko bolta hai: "In files ko track mat karna.""
+
+# Enviornment Variables it is conataining gemini and weather API which shouldn't be leak or access by any other
+.env 
+
+
+#python cache  = python automatically banayega backup lene ki zarurat nahi hai aur pyc = compiled python files hai automatic generate hogi
+__pycache--/
+*.pyc
+
+
+#VS CODE Settings = VS CODE SETTINGS HAI
+.vscode/
+
+
+#Windows Files = windows ki hidden files hai
+desktop.ini
+
+
+#Temporary audio files = rahe ya na rahe matter nahi krti
+voice.mp3
+
+
+#log files = logs dynamically banenge source code nahi hai ye
+logs/
+
+
+#virtual Environment = Agar future me virtual environment banega, uska size kabhi-kabhi hundreds of MB hota hai. Usko Git me kabhi commit nahi karte.
+.venv/
+venv/
