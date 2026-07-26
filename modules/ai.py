@@ -93,14 +93,13 @@ User: {prompt}
 
         end = time.time()
 
-        print(f"API Calls Today: {api_calls}")
-        print(f"Gemini Response Time: {end - start:.2f} seconds")
+        response_time = end - start
 
-        return response.text
+        return response.text, response_time, api_calls
 
     except Exception as e:
         print(f"Gemini Error: {e}")
-        return None
+        return None, None, api_calls
 
 #first question and answer given by jarvis to gemini ai (isko comment kr rha hu taaki yaad rhe)
 #if __name__ == "__main__":

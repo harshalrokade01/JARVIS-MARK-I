@@ -1,5 +1,24 @@
 #so hum jo bhi commands de rhe the jarvis ko wo ab yaha shift kar denge taaki difficulty na ho aur scalability badh jaye
 
+# ---------------- COMMAND LISTS ---------------- #
+
+TIME_COMMANDS = [
+    "time",
+    "what is the time",
+    "tell me the time",
+    "current time",
+    "time please"
+]
+
+DATE_COMMANDS = [
+    "date",
+    "what is the date",
+    "tell me the date",
+    "today's date",
+    "current date",
+    "date please"
+]
+
 #importing 
 from modules.apps import open_notepad, open_chrome, open_app
 
@@ -15,6 +34,7 @@ from modules.screenshot import take_screenshot
 #mission 24 Importing notes from notes.py
 from modules.notes import save_note 
 
+from modules.debug import show_hud
 
 #importing speech module taaaki jarvis bol sake
 from modules.speech import say
@@ -24,6 +44,8 @@ from modules.weather import get_weather
 
 #gemini ai use ho sake jarvis me
 from modules.ai import ask_gemini
+
+import time
 
 
 #importing commands for play,pause, volume up and down
@@ -113,13 +135,29 @@ def execute_command(command):
         return False
 
 
-    elif command == "time":
+    elif command in TIME_COMMANDS:
+
         current_time = show_time()
+
+        show_hud(
+            command="time",
+            command_type="LOCAL",
+            status="SUCCES"
+        )
+
+        print(f"Current Time: {current_time}, Sir")
         say(f"Sir, Current time is {current_time}")
 
 
-    elif command == "date":
+    elif command in DATE_COMMANDS:
+
         current_date = show_date()
+        show_hud(
+            command="date",
+            command_type="LOCAL",
+            status="SUCCES",
+            extra=f"Current Date: {current_date}"
+        )
         say(f"Sir, Today's Date is {current_date}")
 
 
@@ -221,7 +259,13 @@ def execute_command(command):
         if len(words) > 1:
             city = get_query(words)
 
+            start_time = time.perf_counter()
+
             result = get_weather(city)
+
+            end_time = time.perf_counter()
+
+            response_time= end_time - start_time
 
             if result is None:
                 say("Sorry Sir, I Couldn't find that city.")
@@ -230,10 +274,23 @@ def execute_command(command):
             else:
                 city_name, temp, humidity, weather = result
 
-                print(f"City: {city_name}")
-                print(f"Temperature: {temp}°C")
-                print(f"Humidity: {humidity}")
-                print(f"Weather: {weather}")
+                show_hud(
+                    command=command,
+                    command_type="LOCAL",
+                    status="SUCCESS",
+                    response_time=response_time,
+                    extra=(
+                        f"City         : {city_name}\n"
+                        f"Temperature  : {temp:.1f}°C\n"
+                        f"Humidity     : {humidity}%\n"
+                        f"Weather      : {weather}"
+                    )
+                )
+
+                #print(f"City: {city_name}")
+                #print(f"Temperature: {temp}°C")
+                #print(f"Humidity: {humidity}")
+                #print(f"Weather: {weather}")
 
                 say(f"Sir, in {city_name}, the temperature is {temp} degree celcius with {weather}.")
 
@@ -258,7 +315,7 @@ def execute_command(command):
 
 #commands for shortcut buttons
 
-    elif command in ["pause", "pause music", "stop music", "stop song"]:
+    elif command in ["pause", "pause music", "top music", "top song", "stop music", "stop song"]:
         pause_media()
 
     elif command in ["resume", "continue", "play music", "continue music"]:
@@ -283,13 +340,26 @@ def execute_command(command):
     
     elif is_ai_command(command):
 
-        answer = ask_gemini(command)
+        answer, response_time, api_calls = ask_gemini(command)
 
         if answer:
+            show_hud(
+                command=command,
+                command_type="AI",
+                status="SUCCESS",
+                response_time=response_time,
+                api_calls=api_calls
+            )
             print(answer)
             say(answer)
 
         else:
+            show_hud(
+                command=command,
+                command_type="AI",
+                status="FAILED",
+                api_calls=api_calls
+            )
             say("Sorry Sir, Gemini is unavailable right now. Please try again later.")
 
     else:

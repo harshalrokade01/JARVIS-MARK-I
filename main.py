@@ -23,8 +23,11 @@
 
 #MAIN COMMANDS FOR GITHUB
 #git status
+#next
 #git add.
-#git commit -m "ADDED ANYTHIN"
+#next
+#git commit -m "ADDED ANYTHING"
+#next
 #git push
 
 
