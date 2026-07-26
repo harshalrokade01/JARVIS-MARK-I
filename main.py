@@ -21,10 +21,13 @@
 #            Repository
 #      (Permanent Snapshot 📸)
 
-#------COMMANDS------
-#"git status" to check what changes we have done
-#git add . = "Ready to Save"
-#git commit= "Actually Saved"
+#MAIN COMMANDS FOR GITHUB
+#git status
+#git add.
+#git commit -m "ADDED ANYTHIN"
+#git push
+
+
 
 
 
