@@ -99,6 +99,13 @@ def is_ai_command(command):
         "score",
         "ai",
         "openai",
+        "true",
+        "false",
+        "give",
+        "question",
+        "answer",
+        "solve",
+        "statement",
     ]
 
     return any(word in command for word in ai_keywords)
@@ -190,9 +197,119 @@ def handle_system_commands(command):
     # Command not handled here
     return None
 
-        
 
-    
+# ==========================================================
+#                 BROWSER COMMAND HANDLER
+#
+# Purpose:
+# Handles all browser-related commands such as:
+#   • Open Website
+#   • Google Search
+#   • Play YouTube Videos
+#   • Search Products on Amazon
+#
+# Returns:
+#   True  -> Command executed successfully
+#   None  -> Command not handled
+# ==========================================================
+def handle_browser_commands(words):
+
+    #empty command safety check
+    if not words:
+        return None
+
+    # ------------------------------------------------------
+    #                   OPEN COMMAND
+    #       Example:
+    #                   open google
+    #                   open github
+    # ------------------------------------------------------
+
+    if words[0] == "open":
+
+        if len(words) > 1:
+
+            query = get_query(words)
+
+            say(f"Opening {query} Sir")
+
+            if not open_app(query):
+                open_website(query)
+
+            else:
+                say("Please tell me which website to open, Sir")
+
+            return True
+
+
+    # ------------------------------------------------------
+    #                      SEARCH COMMAND
+    # Example:
+    #                   search python tutorials
+    # ------------------------------------------------------
+
+
+    elif words[0] == "search":
+
+        if len(words) > 1:
+
+            query = get_query(words)
+
+            say(f"Searching {query} on Google, Sir")
+
+            search_google(query)
+
+        else:
+            say("Please tell me what to search, Sir")
+
+        return True
+
+    # ------------------------------------------------------
+    #                   PLAY COMMAND
+    # Example:
+    #                   play believer
+    # ------------------------------------------------------
+
+    elif words[0] == "play":
+
+        if len(words) > 1:
+
+            query = get_query(words)
+
+            say(f"Playing {query} on Youtube, Sir")
+
+            play_youtube(query)
+
+        else:
+            say("Please tell me which song to play, Sir")
+
+        return True
+
+    # ------------------------------------------------------
+    #                  BUY COMMAND
+    # Example:
+    #                   buy keyboard
+    # ------------------------------------------------------
+
+    elif words[0] == "buy":
+
+        if len(words) > 1:
+
+            query = get_query(words)
+
+            say(f"Searching Amazon for {query}, Sir")
+
+            find_amazon(query)
+
+        else:
+            say("Please tell me what product to find, Sir")
+
+        return True
+
+    #command not handled
+    return None
+
+
 
 
 
@@ -214,6 +331,22 @@ def execute_command(command):
         say("Yes,Sir?")
         return True
 
+    #actually this below line is used for debugging whether ai is detecting or not
+    #print(f"AI Detection: {is_ai_command(command)}")
+
+
+# ==========================================================
+# Check Browser Commands
+#
+# If the command belongs to Browser Handler,
+# execute it and stop further checking.
+# ==========================================================
+
+    result = handle_browser_commands(words)
+
+    if result is not None:
+        return result
+
     
 # Check if the command belongs to System Commands.
 # If handled, no need to execute the remaining command checks.
@@ -231,7 +364,7 @@ def execute_command(command):
 
 # ---------------- EXIT COMMAND ---------------- #
 
-    elif command in ["turn off jarvis", "exit jarvis", "shut down jarvis"]:
+    elif command in ["turn off jarvis", "is it jarvis", "exit jarvis", "shut down jarvis"]:
         say("Jarvis Shutting off, GoodBye Sir!")
         return False
 
@@ -294,68 +427,6 @@ def execute_command(command):
     elif command == "chrome":
         say("Opening Chrome Sir")
         open_chrome()
-
-
-#MAIN FUNCTIONS FOR TASK 
-    elif words[0] == "open":
-
-        if len(words)> 1:
-            query  = get_query(words)
-            say(f"Opening {query} Sir")
-            if not open_app(query):
-                open_website(query)
-
-        else:
-            say("Please Tell Me which website to open")
-
-
-    elif words[0] == "search":
-
-        if len(words)> 1:
-            #query function banaya hai istead of commands hum .join(words) use kar rhe to get clean and neat code
-
-            query  = get_query(words)
-            say(f"Searching {query} on Google, Sir")
-            search_google(query)
-
-        else:
-            say("Please Tell Me what to search, Sir")
-
-#finally automatic song play kar sakte h with the help of jarvis, gemini ai and youtube
-    elif words[0] == "play":
-
-        if len(words) > 1:
-            query  = get_query(words)
-            say(f"Playing {query} on Youtube, Sir")
-            play_youtube(query)
-
-        else:
-            say("Please Tell Me Which Song to play, Sir")
-
-
-    elif words[0] == "buy":
-
-        if len(words) > 1:
-            query  = get_query(words)
-            say(f"Searching Amazon for {query}, Sir")
-            find_amazon(query)
-
-        else:
-            say("Please Tell Me What Product to Find, Sir")
-
-
-#    elif words[0] == "jarvis":
-#
-#        if len(words) > 1:
-#            query = get_query(words)
-#
-#            answer = ask_gemini(query)
-#
-#            print(answer)
-#            say(answer)        
-#
-#        else:
-#            say("I'm listening, Sir. What would you like to know?")
 
 
 #FUNCTION FOR SCREENSHOT BY SAYING
@@ -452,7 +523,6 @@ def execute_command(command):
         mute_volume()
 
 
-    
     elif is_ai_command(command):
 
         answer, response_time, api_calls = ask_gemini(command)
