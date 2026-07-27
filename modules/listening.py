@@ -46,6 +46,14 @@ def takeCommand():
         text = text.replace("wether", "weather")
         text = text.replace("vedhar", "weather")
 
+# ---------------- MEDIA COMMAND NORMALIZATION ---------------- #
+
+        text = text.replace("pose", "pause")
+        text = text.replace("pausee", "pause")
+
+
+
+#-----------------------------------------------------------------
         #print the text
         print(text)
 

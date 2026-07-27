@@ -384,11 +384,160 @@ def handle_weather_commands(words, command):
     return None
 
 
+# ==========================================================
+#                 MEDIA COMMAND HANDLER
+#
+# Purpose:
+# Handles media playback and volume control commands.
+#
+# Handles:
+#   • Pause
+#   • Resume
+#   • Next
+#   • Previous
+#   • Volume Up
+#   • Volume Down
+#   • Mute
+#
+# Returns:
+#   True  -> Media command executed
+#   None  -> Command not handled
+# ==========================================================
+
+def handle_media_commands(command):
+
+    # ------------------------------------------------------
+    #                      PAUSE COMMAND
+    # Example:
+    # pause
+    # pause music
+    # stop music
+    # ------------------------------------------------------
+
+    if command in [
+        "pause",
+        "pause music",
+        "top music",
+        "top song",
+        "stop music",
+        "stop song"
+    ]:
+
+        pause_media()
+        return True
+
+    # ------------------------------------------------------
+    # RESUME COMMAND
+    # ------------------------------------------------------
+
+    elif command in [
+        "resume",
+        "continue",
+        "play music",
+        "continue music"
+    ]:
+
+        pause_media()
+        return True
+
+
+    # ------------------------------------------------------
+    # NEXT COMMAND
+    # ------------------------------------------------------
+
+    elif command in [
+        "next",
+        "next song",
+        "skip"
+    ]:
+
+        next_media()
+        return True
+
+
+    # ------------------------------------------------------
+    # PREVIOUS COMMAND
+    # ------------------------------------------------------
+
+    elif command in [
+        "previous",
+        "previous song",
+        "back"
+    ]:
+
+        previous_media()
+        return True
+
+
+    # ------------------------------------------------------
+    # VOLUME UP COMMAND
+    # ------------------------------------------------------
+
+    elif command in [
+        "volume up",
+        "volume",
+        "volume of",
+        "increase volume",
+        "louder"
+    ]:
+
+        volume_up()
+        return True
+
+
+    # ------------------------------------------------------
+    # VOLUME DOWN COMMAND
+    # ------------------------------------------------------
+
+    elif command in [
+        "volume down",
+        "decrease volume",
+        "lower volume",
+        "softer"
+    ]:
+
+        volume_down()
+        return True
+
+
+    # ------------------------------------------------------
+    # MUTE COMMAND
+    # ------------------------------------------------------
+
+    elif command in [
+        "mute",
+        "mute volume",
+        "silent"
+    ]:
+
+        mute_volume()
+        return True
+
+    #Command not handled by Media Handler
+    return None
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#---------------------------------------------------------------------------------------------------
 #function create karenge user command call karne ke liye
 def execute_command(command):
 
@@ -424,6 +573,19 @@ def execute_command(command):
 # ==========================================================
 
     result = handle_weather_commands(words, command)
+
+    if result is not None:
+        return result
+
+
+# ==========================================================
+# Check Media Commands
+#
+# If the command belongs to Media Handler,
+# execute it and stop further checking.
+# ==========================================================
+
+    result = handle_media_commands(command)
 
     if result is not None:
         return result
