@@ -15,8 +15,7 @@ def take_screenshot():
 
     folder = "Screenshots"
 
-    if not os.path.exists(folder):
-        os.makedirs(folder)
+    os.makedirs(folder, exist_ok=True)
 
         
 
@@ -24,8 +23,10 @@ def take_screenshot():
 
     filename = f"Screenshot_{current_time}.png"
 
+    filepath = os.path.join(folder, filename)
+
     image = pyautogui.screenshot()
 
-    image.save(filename)
+    image.save(filepath)
 
-    return filename
+    return filepath

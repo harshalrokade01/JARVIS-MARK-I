@@ -38,7 +38,7 @@
 
 
 #IMPORTING ALL THE COMMANDS
-from modules.commands import execute_command
+from modules.command_handlers.commands import execute_command
 
 
 #MISSION 16: IMPORTING FUNCTION FOR COMMAND

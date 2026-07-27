@@ -50,6 +50,10 @@ from modules.ai import ask_gemini
 
 import time
 
+from modules.command_handlers.app_handler import handle_app_commands
+
+from modules.command_handlers.screenshot_handler import handle_screenshot_commands
+
 
 #importing commands for play,pause, volume up and down
 from modules.media import(
@@ -791,43 +795,36 @@ def execute_command(command):
         return result
 
 
+# ==========================================================
+# Check App Commands
+#
+# If the command belongs to App Handler,
+# execute it and stop further checking.
+# ==========================================================
+
+    result = handle_app_commands(command)
+
+    if result is not None:
+        return result
 
 
+# ==========================================================
+# Check Screenshot Commands
+#
+# If the command belongs to Screenshot Handler,
+# execute it and stop further checking.
+# ==========================================================
 
+    result = handle_screenshot_commands(command)
+
+    if result is not None:
+        return result
 
 
 
 
 #-------------------------------------------------------------------------------------------------
     
-# Check if the command belongs to System Commands.
-# If handled, no need to execute the remaining command checks.
-
-
-#    result = handle_system_command(command)
-#    if result is not None:
-#        return result
-
-
-    elif command == "notepad":
-        say("Opening Notepad Sir")
-        open_notepad()
-
-
-    elif command == "chrome":
-        say("Opening Chrome Sir")
-        open_chrome()
-
-
-#FUNCTION FOR SCREENSHOT BY SAYING
-    elif command in ["take screenshot","screenshot"]:
-
-        filename = take_screenshot()
-
-        print(f"Screenshot Saved as: {filename}")
-
-        say("Screenshot Captured  and Saved Successfully, Sir.")
-
 
 #function for 
     elif is_ai_command(command):

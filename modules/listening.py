@@ -60,6 +60,11 @@ def takeCommand():
         text = text.replace("data", "date")
         text = text.replace("today date", "today's date")
 
+# ---------------- EXIT COMMAND NORMALIZATION ---------------- #
+
+        text = text.replace("exact charges", "exit jarvis")
+        text = text.replace("exit service", "exit jarvis")
+        text = text.replace("x jarvis", "exit jarvis")
 
 
 #-----------------------------------------------------------------
