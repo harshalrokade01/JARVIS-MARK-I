@@ -66,9 +66,18 @@ from modules.media import(
 
 #ek function banayenge taki ye "query  = " ".join(words[1:])" baar baar call ho sake aur har function me baar baar likhna naa pade
 def get_query(words):
+
     return " ".join(words[1:])
 
-#COMMAND ANALYZER FOR GENAI
+
+# ==========================================================
+# AI COMMAND DETECTION
+#
+# Note:
+# This function is temporary.
+# Future versions will automatically send all
+# unhandled commands to Gemini AI.
+# ==========================================================
 def is_ai_command(command):
     ai_keywords = [
         "who",
@@ -423,6 +432,8 @@ def handle_media_commands(command):
         "stop song"
     ]:
 
+        print("DEBUG: Pause command executed")
+
         pause_media()
         return True
 
@@ -517,10 +528,79 @@ def handle_media_commands(command):
     return None
 
 
+# ==========================================================
+#                 NOTES COMMAND HANDLER
+#
+# Purpose:
+# Handles note saving commands.
+#
+# Example:
+#   note buy milk
+#   note meeting at 5 pm
+#
+# Returns:
+#   True  -> Note command executed
+#   None  -> Command not handled
+# ==========================================================
+
+def handle_notes_commands(words):
+
+    if not words:
+        return None
+
+    # ------------------------------------------------------
+    #                  Note COMMAND
+    # Example:
+    # note buy milk
+    # ------------------------------------------------------
+
+    if words[0] == "note":
+
+        if len(words) > 1:
+
+            #extract everything after "note"
+            note = get_query(words)
+
+            #save note to file
+            filepath = save_note(note)
+
+            print(f"Note Saved in {filepath}")
+
+            say("Your Note has been Saved Successfully, Sir.")
+
+        else: 
+            say("Please tell me what to save, Sir.")
+
+        return True
+    
+    # Command not handled by Notes Handler
+    return None
 
 
+# ==========================================================
+#                 SYSTEM COMMAND HANDLER
+#
+# Purpose:
+# Handles all basic Jarvis system commands.
+#
+# Handles:
+#   • Greetings
+#   • Time
+#   • Date
+#   • Exit
+#   • Identity
+#   • Status
+#
+# Returns:
+#   True  -> Command executed
+#   False -> Exit Jarvis
+#   None  -> Command not handled
+# ==========================================================
 
+def handle_system_commands(command):
 
+    
+    return None
 
 
 
@@ -540,6 +620,8 @@ def handle_media_commands(command):
 #---------------------------------------------------------------------------------------------------
 #function create karenge user command call karne ke liye
 def execute_command(command):
+
+    print(f"DEBUG Command Received: '{command}'")
 
     words = command.split()
 
@@ -590,6 +672,25 @@ def execute_command(command):
     if result is not None:
         return result
 
+
+# ==========================================================
+# Check Notes Commands
+#
+# If the command belongs to Notes Handler,
+# execute it and stop further checking.
+# ==========================================================
+
+    result = handle_notes_commands(words)
+
+    if result is not None:
+        return result
+
+
+
+
+
+
+#-------------------------------------------------------------------------------------------------
     
 # Check if the command belongs to System Commands.
 # If handled, no need to execute the remaining command checks.
@@ -682,46 +783,7 @@ def execute_command(command):
         say("Screenshot Captured  and Saved Successfully, Sir.")
 
 
-
-#function for saving notes automatically to jarvis by saying
-    elif words[0] == "note":
-
-        if len(words) > 1:
-            note = get_query(words)
-
-            filepath = save_note(note)
-
-            print(f"Note Saved in {filepath}")
-
-            say("Your Note has been Saved Successfully, Sir.")
-
-        else: 
-            say("Please tell me what to save, Sir.")
-
-#commands for shortcut buttons
-
-    elif command in ["pause", "pause music", "top music", "top song", "stop music", "stop song"]:
-        pause_media()
-
-    elif command in ["resume", "continue", "play music", "continue music"]:
-        pause_media()
-
-    elif command in ["next", "next song", "skip"]:
-        next_media()
-
-    elif command in ["previous", "previous song", "back"]:
-        previous_media()
-
-    elif command in ["volume up", "volume", "volume of", "increase volume", "louder"]:
-        volume_up()
-
-    elif command in ["volume down", "decrease volume", "lower volume", "softer"]:
-        volume_down()
-
-    elif command in ["mute", "mute volume", "silent"]:
-        mute_volume()
-
-
+#function for 
     elif is_ai_command(command):
 
         answer, response_time, api_calls = ask_gemini(command)

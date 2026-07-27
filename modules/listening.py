@@ -50,6 +50,9 @@ def takeCommand():
 
         text = text.replace("pose", "pause")
         text = text.replace("pausee", "pause")
+        text = text.replace("boss", "pause")
+        text = text.replace("paws", "pause")
+        text = text.replace("pass", "pause")
 
 
 
