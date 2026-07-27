@@ -19,6 +19,12 @@ DATE_COMMANDS = [
     "date please"
 ]
 
+
+
+
+#------------------IMPORTING FROM ALL OVER THE FILES IN JARVIS--------------------
+
+
 #new import for system commands from system_commands.py
 from modules.command_handlers.system_commands import handle_system_command
 
@@ -64,7 +70,7 @@ from modules.media import(
     volume_down,
     mute_volume
 )
-
+#-------------------------------------------------------------------------------------------------------
 
 
 
@@ -708,12 +714,10 @@ def handle_system_commands(command):
 
 
 
-
-
-
-
-
 #---------------------------------------------------------------------------------------------------
+
+
+
 #function create karenge user command call karne ke liye
 def execute_command(command):
 
@@ -826,12 +830,19 @@ def execute_command(command):
 #-------------------------------------------------------------------------------------------------
     
 
-#function for 
-    elif is_ai_command(command):
+# ==========================================================
+# AI FALLBACK
+#
+# If no local handler recognizes the command,
+# forward it to Gemini AI.
+# ==========================================================
+
+    else:
 
         answer, response_time, api_calls = ask_gemini(command)
 
         if answer:
+
             show_hud(
                 command=command,
                 command_type="AI",
@@ -843,6 +854,7 @@ def execute_command(command):
             say(answer)
 
         else:
+
             show_hud(
                 command=command,
                 command_type="AI",
@@ -851,10 +863,9 @@ def execute_command(command):
             )
             say("Sorry Sir, Gemini is unavailable right now. Please try again later.")
 
-    else:
-        say("Sorry Sir, I don't know that command.")
 
     return True
+
 
 
 

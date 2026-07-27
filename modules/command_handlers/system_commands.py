@@ -3,36 +3,27 @@
 from modules.datetime_module import show_time, show_date
 from modules.speech import say
 
+from modules.constants import (
+    TIME_COMMANDS,
+    DATE_COMMANDS,
+    GREETING_COMMANDS,
+    EXIT_COMMANDS,
+    STATUS_COMMANDS,
+)
+
+
 
 def handle_system_command(command):
 
-    if command in [
-        "time",
-        "what is the time",
-        "tell me the time",
-        "current time",
-        "time please"
-    ]:
+    if command in TIME_COMMANDS:
         show_time()
         return True
 
-    elif command in [
-        "date",
-        "what is the date",
-        "tell me the date",
-        "today's date",
-        "current date",
-        "date please"
-    ]:
+    elif command in DATE_COMMANDS:
         show_date()
         return True
 
-    elif command in [
-        "hi jarvis",
-        "hello jarvis",
-        "hey jarvis",
-        "what is jarvis"
-    ]:
+    elif command in GREETING_COMMANDS:
         say("Hello Sir.")
         return True
 
@@ -40,11 +31,11 @@ def handle_system_command(command):
         say("I am Jarvis Mark One, Sir.")
         return True
 
-    elif command == "how are you":
+    elif command in STATUS_COMMANDS:        
         say("Functioning Perfectly, Sir.")
         return True
 
-    elif command == "exit jarvis":
+    elif command in EXIT_COMMANDS:        
         say("Exiting, GoodBye Sir.")
         return False
 
