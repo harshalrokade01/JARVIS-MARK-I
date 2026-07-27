@@ -599,16 +599,108 @@ def handle_notes_commands(words):
 
 def handle_system_commands(command):
 
-    
+    # ---------------- GREETING COMMANDS ---------------- #
+
+    if command in [
+        "hi jarvis",
+        "hii jarvis",
+        "hello jarvis",
+        "hey jarvis"
+    ]:
+
+        say("Hello Sir!")
+
+        return True
+    # ------------------------------------------------------
+# TIME COMMANDS
+# ------------------------------------------------------
+
+    elif command in TIME_COMMANDS:
+
+        current_time = show_time()
+
+        show_hud(
+            command="time",
+            command_type="LOCAL",
+            status="SUCCESS",
+            extra=f"Current Time : {current_time}"
+        )
+
+        say(f"Sir, Current time is {current_time}")
+
+        return True
+
+
+# ------------------------------------------------------
+# DATE COMMANDS
+# ------------------------------------------------------
+
+    elif command in DATE_COMMANDS:
+
+        current_date = show_date()
+
+        show_hud(
+            command="date",
+            command_type="LOCAL",
+            status="SUCCESS",
+            extra=f"Current Date : {current_date}"
+        )
+
+        say(f"Sir, Today's date is {current_date}")
+
+        return True
+
+
+# ------------------------------------------------------
+# IDENTITY COMMAND
+# ------------------------------------------------------
+
+    elif command == "your name":
+
+        print("I'm Jarvis")
+
+        say("I'm Jarvis")
+
+        return True
+
+
+# ------------------------------------------------------
+# STATUS COMMAND
+# ------------------------------------------------------
+
+    elif command in [
+        "how are you",
+        "how r u",
+        "how are u",
+        "how you doing",
+        "how do you do"
+    ]:
+
+        print("I'm Fine Sir.")
+
+        say("I'm doing well, Sir. How can I help you?")
+
+        return True
+
+
+# ------------------------------------------------------
+# EXIT COMMAND
+# ------------------------------------------------------
+
+    elif command in [
+        "exit jarvis",
+        "turn off jarvis",
+        "shut down jarvis",
+        "goodbye jarvis"
+    ]:
+
+        say("Jarvis Shutting off. Goodbye Sir!")
+
+        return False
+
+
+    # Command not handled
     return None
-
-
-
-
-
-
-
-
 
 
 
@@ -686,6 +778,22 @@ def execute_command(command):
         return result
 
 
+# ==========================================================
+# Check System Commands
+#
+# If the command belongs to System Handler,
+# execute it and stop further checking.
+# ==========================================================
+
+    result = handle_system_commands(command)
+
+    if result is not None:
+        return result
+
+
+
+
+
 
 
 
@@ -699,68 +807,6 @@ def execute_command(command):
 #    result = handle_system_command(command)
 #    if result is not None:
 #        return result
-# ---------------- GREETING COMMANDS ---------------- #
-
-    if command in ["hi jarvis", "hii jarvis", "hello jarvis", "hey jarvis"]:
-        say("Hello Sir!")
-        return True
-
-
-# ---------------- EXIT COMMAND ---------------- #
-
-    elif command in ["turn off jarvis", "is it jarvis", "exit jarvis", "shut down jarvis"]:
-        say("Jarvis Shutting off, GoodBye Sir!")
-        return False
-
-
-# ---------------- TIME COMMAND ---------------- #
-
-    elif command in TIME_COMMANDS:
-
-        current_time = show_time()
-
-        show_hud(
-            command="time",
-            command_type="LOCAL",
-            status="SUCCESS",
-            extra=f"Current Time : {current_time}"
-        )
-
-        say(f"Sir, Current time is {current_time}")
-        return True
-
-
-# ---------------- DATE COMMAND ---------------- #
-
-    elif command in DATE_COMMANDS:
-
-        current_date = show_date()
-
-        show_hud(
-            command="date",
-            command_type="LOCAL",
-            status="SUCCESS",
-            extra=f"Current Date : {current_date}"
-        )
-
-        say(f"Sir, Today's date is {current_date}")
-        return True
-
-
-# ---------------- IDENTITY COMMAND ---------------- #
-
-    elif command == "your name":
-        print("I'm Jarvis")
-        say("I'm Jarvis")
-        return True
-
-
-# ---------------- STATUS COMMAND ---------------- #
-
-    elif command == "how r u":
-        print("I'm Fine Sir.")
-        say("I'm doing well, Sir. How can I help you?")
-        return True
 
 
     elif command == "notepad":

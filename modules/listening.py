@@ -54,6 +54,12 @@ def takeCommand():
         text = text.replace("paws", "pause")
         text = text.replace("pass", "pause")
 
+# ---------------- SYSTEM COMMAND NORMALIZATION ---------------- #
+
+        text = text.replace("state", "date")
+        text = text.replace("data", "date")
+        text = text.replace("today date", "today's date")
+
 
 
 #-----------------------------------------------------------------
