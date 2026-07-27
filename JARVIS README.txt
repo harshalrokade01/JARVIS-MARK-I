@@ -4,4 +4,55 @@ toh Jarvis banana ke liye hume proper python aani chahiye wo toh thoda mushkil r
 
 hope so this gonna work
 
-love you IronMan, 3000
+love you Iron Man, 3000
+______________________________________________
+
+PHASE 1 - Python Fundamentals ✅ (In Progress)
+
+✔ while
+✔ if / elif / else
+✔ import
+✔ datetime
+✔ OS 
+✔ Open Applications
+
+━━━━━━━━━━━━━━━━━━━━
+
+PHASE 2
+
+⬜ Functions
+⬜ Browser Module
+⬜ Google Search
+⬜ YouTube
+⬜ File Explorer
+⬜ VS Code
+
+━━━━━━━━━━━━━━━━━━━━
+
+PHASE 3
+
+⬜ Voice Recognition
+⬜ Text To Speech
+⬜ Wake Word
+⬜ AI Chat
+
+━━━━━━━━━━━━━━━━━━━━
+
+PHASE 4
+
+⬜ Memory
+⬜ Vision
+⬜ Face Recognition
+⬜ Automation
+
+━━━━━━━━━━━━━━━━━━━━
+
+PHASE 5
+
+⬜ Iron Man HUD
+⬜ Animations
+⬜ Plugins
+⬜ Complete AI Assistant
+
+
+

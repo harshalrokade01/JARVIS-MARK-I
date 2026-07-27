@@ -34,11 +34,17 @@ def takeCommand():
         text = recognizer.recognize_google(audio, language="en-IN") 
         text = text.lower()
 
-        #converting to text
+# ---------------- COMMAND NORMALIZATION ---------------- #
+        # Fix common speech recognition mistakes
         text = text.replace("service", "jarvis")
         text = text.replace("jarviss", "jarvis")
         text = text.replace("jervis", "jarvis")
         text = text.replace("travis", "jarvis")
+
+        text = text.replace("vedar", "weather")
+        text = text.replace("whether", "weather")
+        text = text.replace("wether", "weather")
+        text = text.replace("vedhar", "weather")
 
         #print the text
         print(text)
