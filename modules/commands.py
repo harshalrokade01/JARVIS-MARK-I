@@ -152,7 +152,7 @@ def handle_system_commands(command):
 
     
     # ---------------- EXIT COMMAND ---------------- #
-    elif command in ["turn off jarvis", "accept jarvis", "exact jarvis", "exit jarvis", "switch off jarvis"]:
+    elif command in ["turn off jarvis", "exit jarvis", "switch off jarvis", "shutdown jarvis"]:
 
         say("Jarvis Shutting Off, Goodbye Sir!")
         return False
@@ -231,7 +231,7 @@ def handle_system_commands(command):
 #   True  -> Command executed successfully
 #   None  -> Command not handled
 # ==========================================================
-def handle_browser_commands(words):
+def handle_browser_commands(words, command):
 
     #empty command safety check
     if not words:
@@ -243,6 +243,12 @@ def handle_browser_commands(words):
     #                   open google
     #                   open github
     # ------------------------------------------------------
+
+    if open_website(command):
+
+        say(f"Opening {command} Sir")
+
+        return True
 
     if words[0] == "open":
 
@@ -750,7 +756,7 @@ def execute_command(command):
 # execute it and stop further checking.
 # ==========================================================
 
-    result = handle_browser_commands(words)
+    result = handle_browser_commands(words, command)
 
     if result is not None:
         return result

@@ -13,6 +13,18 @@ import yt_dlp
 import webbrowser
 import subprocess
 
+WEBSITES = {
+    "google": "google.com",
+    "youtube": "youtube.com",
+    "github": "github.com",
+    "amazon": "amazon.in",
+    "chatgpt": "chat.openai.com",
+    "instagram": "instagram.com",
+    "facebook": "facebook.com",
+    "linkedin": "linkedin.com",
+    "x": "x.com",
+    "twitter": "x.com",
+}
 
 
 #MISSION 9 WE ARE CALLING INDIVIDUAL WEBSITE ie TIME TAKING AND INEFFICIENT
@@ -22,13 +34,6 @@ import subprocess
 #    print("Opening Website, Sir..")
 #    webbrowser.open("https://www.google.com")
 
-#def open_youtube():
-#    print("Opening Website, Sir..")
-#    webbrowser.open("https://www.youtube.com")
-
-#def open_github():
-#    print("Opening Website, Sir..")
-#    webbrowser.open("https://www.github.com")
 
 
 
@@ -36,9 +41,18 @@ import subprocess
 #MISSION 10 OPENING ANY WEBSITE WHICH IS AVAILABLE IN INTERNET..
 
 def open_website(website):
-    print("Opening Site Sir ")
-    
-    webbrowser.open("https://www." + website + ".com")
+
+    website = website.lower()
+
+    if website in WEBSITES:
+
+        print("Opening Site Sir.")
+
+        webbrowser.open("https://" + WEBSITES[website])
+
+        return True
+
+    return False
 
 
 #MISSION 11 SEARCHING IN GOOGLE ANYTHING I WANT NOW..

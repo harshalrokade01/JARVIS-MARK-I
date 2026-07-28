@@ -1,4 +1,6 @@
 
+import ctypes
+
 
 from modules.datetime_module import show_time, show_date, get_greeting
 from modules.speech import say
@@ -37,6 +39,19 @@ def handle_system_command(command):
 
     elif command in STATUS_COMMANDS:
         say("Functioning perfectly, Sir.")
+        return True
+
+    elif command in [
+        "lock pc",
+        "lock",
+        "lock computer",
+        "lock device",
+        "lock windows",
+    ]:
+        say("Locking Your Computer, Sir")
+
+        ctypes.windll.user32.LockWorkStation()
+        
         return True
 
     elif command in EXIT_COMMANDS:

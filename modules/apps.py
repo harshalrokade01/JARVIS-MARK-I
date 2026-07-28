@@ -21,6 +21,7 @@ APP_PATHS = {
     "pictures": os.path.join(os.path.expanduser("~"), "OneDrive", "Pictures"),
     "videos": os.path.join(os.path.expanduser("~"), "OneDrive", "Videos"),
     "music": os.path.join(os.path.expanduser("~"), "OneDrive", "Music"),
+    "c drive": "C:\\",
 }
 
 def open_app(app_name):

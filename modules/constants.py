@@ -30,10 +30,14 @@ GREETING_COMMANDS = [
 ]
 
 EXIT_COMMANDS = [
+    "exit",
     "exit jarvis",
     "turn off jarvis",
     "shutdown jarvis",
     "goodbye jarvis",
+    "exact jarvis",
+    "exacrt jarvis",
+    "exit navigation",
 ]
 
 STATUS_COMMANDS = [
