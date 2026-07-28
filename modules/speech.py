@@ -12,10 +12,13 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 import pygame
 
-pygame.mixer.init()
+#pygame.mixer.init()
 
 #improving tts command responser ie reducing time delay
 async def speak(text):
+
+    if not pygame.mixer.get_init():
+        pygame.mixer.init()
 
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_file:

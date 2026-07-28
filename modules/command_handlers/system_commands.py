@@ -1,6 +1,6 @@
 
 
-from modules.datetime_module import show_time, show_date
+from modules.datetime_module import show_time, show_date, get_greeting
 from modules.speech import say
 
 from modules.constants import (
@@ -24,19 +24,23 @@ def handle_system_command(command):
         return True
 
     elif command in GREETING_COMMANDS:
-        say("Hello Sir.")
+
+        greeting = get_greeting()
+
+        say(f"{greeting}, Sir. How may I assist you?")
+
         return True
 
     elif command == "your name":
         say("I am Jarvis Mark One, Sir.")
         return True
 
-    elif command in STATUS_COMMANDS:        
-        say("Functioning Perfectly, Sir.")
+    elif command in STATUS_COMMANDS:
+        say("Functioning perfectly, Sir.")
         return True
 
-    elif command in EXIT_COMMANDS:        
-        say("Exiting, GoodBye Sir.")
+    elif command in EXIT_COMMANDS:
+        say("Exiting. Goodbye Sir.")
         return False
 
     return None

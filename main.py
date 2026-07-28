@@ -35,9 +35,9 @@
 
 
 
-
-
 #IMPORTING ALL THE COMMANDS
+#from modules.commands import execute_command
+
 from modules.commands import execute_command
 
 
@@ -65,13 +65,12 @@ def welcome():
     print("Gemini AI     : READY")
     print("Microphone    : READY")
     print("=" * 50)
-    print("Love You, 3000 ❤️")
+    print("Love You, 3000")
 
 
 
 #MISSION 6: CALLING THE FUNCTION.
 welcome()
-
 
 while True:
 

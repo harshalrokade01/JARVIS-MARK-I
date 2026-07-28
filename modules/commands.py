@@ -152,7 +152,7 @@ def handle_system_commands(command):
 
     
     # ---------------- EXIT COMMAND ---------------- #
-    elif command in ["turn off jarvis", "exit jarvis", "switch off jarvis"]:
+    elif command in ["turn off jarvis", "accept jarvis", "exact jarvis", "exit jarvis", "switch off jarvis"]:
 
         say("Jarvis Shutting Off, Goodbye Sir!")
         return False
@@ -793,7 +793,7 @@ def execute_command(command):
 # execute it and stop further checking.
 # ==========================================================
 
-    result = handle_system_commands(command)
+    result = handle_system_command(command)
 
     if result is not None:
         return result
@@ -837,35 +837,33 @@ def execute_command(command):
 # forward it to Gemini AI.
 # ==========================================================
 
+    answer, response_time, api_calls = ask_gemini(command)
+
+    if answer:
+
+        show_hud(
+            command=command,
+            command_type="AI",
+            status="SUCCESS",
+            response_time=response_time,
+            api_calls=api_calls
+        )
+
+        print(answer)
+        say(answer)
+
     else:
 
-        answer, response_time, api_calls = ask_gemini(command)
+        show_hud(
+            command=command,
+            command_type="AI",
+            status="FAILED",
+            api_calls=api_calls
+        )
 
-        if answer:
-
-            show_hud(
-                command=command,
-                command_type="AI",
-                status="SUCCESS",
-                response_time=response_time,
-                api_calls=api_calls
-            )
-            print(answer)
-            say(answer)
-
-        else:
-
-            show_hud(
-                command=command,
-                command_type="AI",
-                status="FAILED",
-                api_calls=api_calls
-            )
-            say("Sorry Sir, Gemini is unavailable right now. Please try again later.")
-
+        say("Sorry Sir, Gemini is unavailable right now. Please try again later.")
 
     return True
-
 
 
 
