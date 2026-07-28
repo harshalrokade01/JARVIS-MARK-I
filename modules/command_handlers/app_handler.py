@@ -22,6 +22,12 @@ from modules.speech import say
 
 def handle_app_commands(command):
 
+    if open_app(command):
+
+        say(f"Opening {command} Sir")
+
+        return True
+
     if command.startswith("open"):
 
         app_name = command.replace("open ", "").strip()
