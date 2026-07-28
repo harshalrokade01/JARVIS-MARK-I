@@ -250,13 +250,21 @@ def handle_browser_commands(words):
 
             query = get_query(words)
 
-            say(f"Opening {query} Sir")
+            if open_app(query):
 
-            if not open_app(query):
-                open_website(query)
+                say(f"Opening {query} Sir")
 
             else:
-                say("Please tell me which website to open, Sir")
+
+                say(f"Opening {query} Sir")
+
+                open_website(query)
+
+            return True
+
+        else:
+
+            say("Please tell me what to open, Sir")
 
             return True
 

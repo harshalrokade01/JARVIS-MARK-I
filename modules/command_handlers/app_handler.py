@@ -1,5 +1,7 @@
+
+
 # importing
-from modules.apps import open_notepad, open_chrome
+from modules.apps import open_app
 from modules.speech import say
 
 
@@ -20,31 +22,20 @@ from modules.speech import say
 
 def handle_app_commands(command):
 
-    # ------------------------------------------------------
-    # NOTEPAD COMMAND
-    # ------------------------------------------------------
+    if command.startswith("open"):
 
-    if command == "notepad":
+        app_name = command.replace("open ", "").strip()
 
-        say("Opening Notepad Sir")
+        if open_app(app_name):
 
-        open_notepad()
+            say(f"Opening {app_name} Sir")
 
-        return True
+            return True
 
+        else:
 
-    # ------------------------------------------------------
-    # CHROME COMMAND
-    # ------------------------------------------------------
+            say(f"Sorry Sir, I couldn't find {app_name}")
 
-    elif command == "chrome":
+            return True
 
-        say("Opening Chrome Sir")
-
-        open_chrome()
-
-        return True
-
-
-    # Command not handled by App Handler
     return None

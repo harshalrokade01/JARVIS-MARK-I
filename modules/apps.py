@@ -4,23 +4,32 @@
 
 import os
 
+
 #mission 30: local folder command through open ho rhe basic and imp folders
 APP_PATHS = {
     "notepad": "notepad",
     "chrome": r"C:\Program Files\Google\Chrome\Application\chrome.exe",
 
-    "desktop": os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop"),    "downloads": os.path.join(os.path.expanduser("~"), "Downloads"),
+    "calculator": "calc",
+    "paint": "mspaint",
+    "cmd": "cmd",
+    "explorer": "explorer",
+
+    "desktop": os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop"),
+    "downloads": os.path.join(os.path.expanduser("~"), "Downloads"),
     "documents": os.path.join(os.path.expanduser("~"), "OneDrive", "Documents"),
     "pictures": os.path.join(os.path.expanduser("~"), "OneDrive", "Pictures"),
     "videos": os.path.join(os.path.expanduser("~"), "OneDrive", "Videos"),
-    "music": os.path.join(os.path.expanduser("~"), "OneDrive","Music"),   
+    "music": os.path.join(os.path.expanduser("~"), "OneDrive", "Music"),
 }
 
 def open_app(app_name):
+
     path = APP_PATHS.get(app_name)
 
     if path:
         print(f"Opening {app_name.title()}, Sir...")
+
         os.startfile(path)
         return True
 

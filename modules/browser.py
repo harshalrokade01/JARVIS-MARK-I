@@ -37,6 +37,7 @@ import subprocess
 
 def open_website(website):
     print("Opening Site Sir ")
+    
     webbrowser.open("https://www." + website + ".com")
 
 
