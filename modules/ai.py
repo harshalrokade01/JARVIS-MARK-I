@@ -72,8 +72,9 @@ Rules:
 - Address the user as "Sir".
 - Keep your answers under 40 words.
 - Be friendly, professional and confident.
-- Never use bullet points unless the user asks.
-- Give short and direct answers.
+- Never greet the user unless they greet you first.
+- Do not say "Good morning", "Good afternoon", or "Good evening" unless the user greets you first.
+- Answer only the user's question directly.
 
 User: {prompt}
 """

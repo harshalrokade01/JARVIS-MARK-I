@@ -15,12 +15,108 @@ from modules.speech import say
 # None if not found
 # ==========================================================
 
+#------------------------------------------------------------------------------------
+
+
+# ==========================================================
+# GET ALL FILES
+#
+# Purpose:
+# Collect all files from the search locations.
+#
+# Returns:
+# List of full file paths.
+# ==========================================================
+
+def get_all_files(search_paths):
+
+    all_files = []
+
+    for folder in search_paths:
+
+        if not os.path.exists(folder):
+            continue
+
+        for root, dirs, files in os.walk(folder):
+
+            dirs[:] = [
+                d for d in dirs
+                if d not in [".venc",".git","__pycache__","node_modules"]
+            ]
+
+            for file in files:
+
+                full_path = os.path.join(root, file)
+
+                all_files.append(full_path)
+
+    return all_files
+
+
+
+
+
+# ==========================================================
+# EXACT FILE SEARCH
+# ==========================================================
+
+def search_exact(query, search_paths):
+
+    for folder in search_paths:
+
+        if not os.path.exists(folder):
+            continue
+
+        for root, dirs, files in os.walk(folder):
+
+            dirs[:] = [
+                d for d in dirs
+                if d not in [".venv", ".git", "__pycache__", "node_modules"]
+            ]
+
+            for file in files:
+
+                filename = os.path.splitext(file)[0].lower()
+
+                if filename == query.lower():
+
+                    full_path = os.path.join(root, file)
+
+                    return full_path
+
+    return None
+
+# ==========================================================
+# STARTS WITH SEARCH
+# ==========================================================
+
+def search_startswith(query, search_paths):
+
+    pass
+
+
+# ==========================================================
+# CONTAINS SEARCH
+# ==========================================================
+
+def search_contains(query, search_paths):
+
+    pass
+
+
+
+
+
+
+
+
+
+
 def search_file(query):
 
-    print("search_file() called")
     # ------------------------------------------------------
-# IMPORTANT SEARCH LOCATIONS
-# ------------------------------------------------------
+    # IMPORTANT SEARCH LOCATIONS
+    # ------------------------------------------------------
 
     search_paths = [
 
@@ -36,33 +132,27 @@ def search_file(query):
 
     ]
 
-    for folder in search_paths:
+    # ------------------------------------------------------
+    # SEARCH FOR EXACT MATCH
+    # ------------------------------------------------------
 
-        print(f"\nSearching in: {folder}")
+    full_path = search_exact(query, search_paths)
 
-        if not os.path.exists(folder):
-            continue
+    if full_path:
 
-        for root, dirs, files in os.walk(folder):
+        filename = os.path.splitext(os.path.basename(full_path))[0]
 
-            dirs[:] = [d for d in dirs if d not in [".venv",".git", "__pycache__", "node_modules"]]
+        say(f"I found {filename}. Opening it, Sir.")
 
-            for file in files:
+        os.startfile(full_path)
 
-            # ------------------------------------------------------
-            # CHECK WHETHER FILE NAME MATCHES USER QUERY
-            # ------------------------------------------------------
-                filename = os.path.splitext(file)[0].lower()
+        return
 
-                if filename == query.lower():
+    # ------------------------------------------------------
+    # FILE NOT FOUND
+    # ------------------------------------------------------
 
-                    full_path = os.path.join(root, file)
-
-                    print(f"Exact Match Found: {file}")
-
-                    os.startfile(full_path)
-
-                    return
+    say("Sorry Sir, I couldn't find that file.")
 
 
 

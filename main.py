@@ -78,6 +78,8 @@ while True:
     #from here we will call command function
     command = takeCommand()
 
+    print(f"Debug Command Received: {command}")
+
 #command normalization
     if command and command.startswith("jarvis"):
         command = command.replace("jarvis", "", 1).strip()
@@ -92,5 +94,7 @@ while True:
 
 
 
+
         
+
 

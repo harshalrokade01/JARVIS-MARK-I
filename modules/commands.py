@@ -62,6 +62,8 @@ from modules.command_handlers.screenshot_handler import handle_screenshot_comman
 
 from modules.command_handlers.file_handler import handle_file_commands
 
+from modules.command_handlers.calculator_handler import handle_calculator_commands
+
 
 
 
@@ -854,6 +856,19 @@ def execute_command(command):
 # ==========================================================
 
     result = handle_file_commands(command)
+
+    if result is not None:
+        return result
+
+
+# ==========================================================
+# Check Calculator Commands
+#
+# If the command belongs to Calculator Handler,
+# execute it and stop further checking.
+# ==========================================================
+
+    result = handle_calculator_commands(command)
 
     if result is not None:
         return result
