@@ -1,9 +1,3 @@
-
-
-import os
-
-from modules.speech import say
-
 # ==========================================================
 # SEARCH FILE
 #
@@ -14,6 +8,24 @@ from modules.speech import say
 # File Path if found
 # None if not found
 # ==========================================================
+
+
+import os
+
+from modules.speech import say
+
+
+
+# ==========================================================
+# LAST SEARCH RESULTS
+#
+# Stores the latest search results temporarily.
+# Used for commands like:
+#   open 1
+#   open 2
+# ==========================================================
+
+
 
 #------------------------------------------------------------------------------------
 
@@ -27,31 +39,6 @@ from modules.speech import say
 # Returns:
 # List of full file paths.
 # ==========================================================
-
-def get_all_files(search_paths):
-
-    all_files = []
-
-    for folder in search_paths:
-
-        if not os.path.exists(folder):
-            continue
-
-        for root, dirs, files in os.walk(folder):
-
-            dirs[:] = [
-                d for d in dirs
-                if d not in [".venc",".git","__pycache__","node_modules"]
-            ]
-
-            for file in files:
-
-                full_path = os.path.join(root, file)
-
-                all_files.append(full_path)
-
-    return all_files
-
 
 
 
@@ -80,11 +67,19 @@ def search_exact(query, search_paths):
 
                 if filename == query.lower():
 
-                    full_path = os.path.join(root, file)
-
-                    return full_path
+                    return os.path.join(root, file)
 
     return None
+
+
+
+
+# ==========================================================
+# FUTURE FEATURES
+#
+# These functions will be implemented in MARK II
+# for advanced file searching.
+# ==========================================================
 
 # ==========================================================
 # STARTS WITH SEARCH
@@ -132,11 +127,8 @@ def search_file(query):
 
     ]
 
-    # ------------------------------------------------------
-    # SEARCH FOR EXACT MATCH
-    # ------------------------------------------------------
-
     full_path = search_exact(query, search_paths)
+
 
     if full_path:
 
@@ -176,6 +168,7 @@ def search_file(query):
 
 def handle_file_commands(command):
 
+
     # ------------------------------------------------------
     # FIND COMMAND (WITHOUT FILE NAME)
     # ------------------------------------------------------
@@ -196,6 +189,6 @@ def handle_file_commands(command):
         search_file(query)
 
         return True
-
+    
     # Command not handled by File Handler
     return None      
