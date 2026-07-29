@@ -48,7 +48,13 @@ def open_website(website):
 
         print("Opening Site Sir.")
 
-        webbrowser.open("https://" + WEBSITES[website])
+        if website == "youtube":
+
+            subprocess.Popen([BRAVE_PATH, "https://" + WEBSITES[website]])
+
+        else:
+
+            webbrowser.open("https://" + WEBSITES[website])
 
         return True
 
@@ -90,7 +96,8 @@ def play_youtube(song):
 def find_amazon(product):
     print("Searching The Product ")
     product = product.replace(" ", "+")
-    webbrowser.open("https://www.amazon.in/s?k=s"+ product)
+    webbrowser.open("https://www.amazon.in/s?k="+ product)
+
 
 
 

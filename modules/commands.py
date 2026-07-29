@@ -25,8 +25,6 @@ DATE_COMMANDS = [
 #------------------IMPORTING FROM ALL OVER THE FILES IN JARVIS--------------------
 
 
-#new import for system commands from system_commands.py
-from modules.command_handlers.system_commands import handle_system_command
 
 #importing 
 from modules.apps import open_notepad, open_chrome, open_app
@@ -55,6 +53,8 @@ from modules.weather import get_weather
 from modules.ai import ask_gemini
 
 import time
+
+from modules.command_handlers.system_handler import handle_system_command
 
 from modules.command_handlers.app_handler import handle_app_commands
 
