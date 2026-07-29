@@ -64,6 +64,8 @@ from modules.command_handlers.file_handler import handle_file_commands
 
 from modules.command_handlers.calculator_handler import handle_calculator_commands
 
+from modules.command_handlers.brightness_handler import handle_brightness_commands
+
 
 
 
@@ -869,6 +871,16 @@ def execute_command(command):
 # ==========================================================
 
     result = handle_calculator_commands(command)
+
+    if result is not None:
+        return result
+
+
+# ==========================================================
+# Check Brightness Commands
+# ==========================================================
+
+    result = handle_brightness_commands(command)
 
     if result is not None:
         return result
