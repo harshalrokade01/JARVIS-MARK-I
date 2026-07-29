@@ -19,7 +19,7 @@
 #                  │
 #                  ▼
 #            Repository
-#      (Permanent Snapshot 📸)
+#      (Permanent Snapshot)
 
 #MAIN COMMANDS FOR GITHUB
 #git status

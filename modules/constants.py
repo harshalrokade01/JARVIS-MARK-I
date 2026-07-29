@@ -31,6 +31,7 @@ GREETING_COMMANDS = [
 
 EXIT_COMMANDS = [
     "exit",
+    "exit jar",
     "exit jarvis",
     "turn off jarvis",
     "shutdown jarvis",

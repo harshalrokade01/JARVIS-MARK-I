@@ -60,6 +60,13 @@ from modules.command_handlers.app_handler import handle_app_commands
 
 from modules.command_handlers.screenshot_handler import handle_screenshot_commands
 
+from modules.command_handlers.file_handler import handle_file_commands
+
+
+
+
+
+
 
 #importing commands for play,pause, volume up and down
 from modules.media import(
@@ -834,6 +841,19 @@ def execute_command(command):
 # ==========================================================
 
     result = handle_screenshot_commands(command)
+
+    if result is not None:
+        return result
+
+
+# ==========================================================
+# Check File Commands
+#
+# If the command belongs to File Handler,
+# execute it and stop further checking.
+# ==========================================================
+
+    result = handle_file_commands(command)
 
     if result is not None:
         return result
