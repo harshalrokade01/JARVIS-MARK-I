@@ -66,8 +66,7 @@ from modules.command_handlers.calculator_handler import handle_calculator_comman
 
 from modules.command_handlers.brightness_handler import handle_brightness_commands
 
-
-
+from modules.command_handlers.battery_handler import handle_battery_commands
 
 
 
@@ -885,6 +884,15 @@ def execute_command(command):
     if result is not None:
         return result
 
+
+# ==========================================================
+# Check Battery Commands
+# ==========================================================
+
+    result = handle_battery_commands(command)
+
+    if result is not None:
+        return result
 
 
 
