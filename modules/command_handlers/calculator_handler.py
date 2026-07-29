@@ -15,6 +15,7 @@
 #   True  -> Command executed
 #   None  -> Command not handled
 # ==========================================================
+import math
 
 from modules.speech import say
 
@@ -40,6 +41,35 @@ def handle_calculator_commands(command):
             expression = command.replace("calculate", "", 1).strip()
 
             try: 
+                # ------------------------------------------------------
+                # SQUARE ROOT
+                # ------------------------------------------------------
+
+                if expression.startswith("square root of"):
+
+                    number = expression.replace("square root of", "").strip()
+
+                    result = math.sqrt(float(number))
+
+                    say(f"The answer is {result}")
+
+                    return True
+
+                # ------------------------------------------------------
+                # POWER
+                # ------------------------------------------------------
+
+                if " power " in expression:
+
+                    base, exponent = expression.split(" power ")
+
+                    result = pow(float(base), float(exponent))
+
+                    say(f"The answer is {result}")
+
+                    return True 
+
+                               
 
                 result = eval(expression)
 
@@ -50,5 +80,5 @@ def handle_calculator_commands(command):
             except Exception:
 
                 say("Sorry Sir, I couldn't calculate this.")
-                
+
             return True
