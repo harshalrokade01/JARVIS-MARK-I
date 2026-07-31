@@ -5,7 +5,7 @@
 import os
 
 
-#creating function
+#creating function for note open and save notes
 def save_note(note):
 
     folder = "Notes"

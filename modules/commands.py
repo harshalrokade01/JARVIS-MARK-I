@@ -68,13 +68,13 @@ from modules.command_handlers.brightness_handler import handle_brightness_comman
 
 from modules.command_handlers.battery_handler import handle_battery_commands
 
-from modules.command_handlers.weather_handler import handle_weather_commands
-
 from modules.command_handlers.browser_handler import handle_browser_commands
 
 from modules.command_handlers.media_handler import handle_media_commands
 
 from modules.command_handlers.weather_handler import handle_weather_commands
+
+from modules.command_handlers.notes_handler import handle_notes_commands
 
 
 
@@ -497,54 +497,6 @@ def handle_media_commands(command):
     return None
 
 
-# ==========================================================
-#                 NOTES COMMAND HANDLER
-#
-# Purpose:
-# Handles note saving commands.
-#
-# Example:
-#   note buy milk
-#   note meeting at 5 pm
-#
-# Returns:
-#   True  -> Note command executed
-#   None  -> Command not handled
-# ==========================================================
-
-def handle_notes_commands(words):
-
-    if not words:
-        return None
-
-    # ------------------------------------------------------
-    #                  Note COMMAND
-    # Example:
-    # note buy milk
-    # ------------------------------------------------------
-
-    if words[0] == "note":
-
-        if len(words) > 1:
-
-            #extract everything after "note"
-            note = get_query(words)
-
-            #save note to file
-            filepath = save_note(note)
-
-            print(f"Note Saved in {filepath}")
-
-            say("Your Note has been Saved Successfully, Sir.")
-
-        else: 
-            say("Please tell me what to save, Sir.")
-
-        return True
-    
-    # Command not handled by Notes Handler
-    return None
-
 
 # ==========================================================
 #                 SYSTEM COMMAND HANDLER
@@ -680,8 +632,6 @@ def handle_system_commands(command):
 #function create karenge user command call karne ke liye
 def execute_command(command):
 
-    print(f"DEBUG Command Received: '{command}'")
-
     words = command.split()
 
     print(f"\nCommand: {command}")
@@ -739,7 +689,7 @@ def execute_command(command):
 # execute it and stop further checking.
 # ==========================================================
 
-    result = handle_notes_commands(words)
+    result = handle_notes_commands(command)
 
     if result is not None:
         return result
