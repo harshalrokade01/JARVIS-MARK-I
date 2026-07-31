@@ -76,6 +76,7 @@ from modules.command_handlers.weather_handler import handle_weather_commands
 
 from modules.command_handlers.notes_handler import handle_notes_commands
 
+from modules.command_handlers.ai_commands_handler import handle_ai_commands
 
 
 
@@ -222,7 +223,7 @@ def handle_system_commands(command):
 
     
     # ---------------- STATUS COMMAND ---------------- #
-    elif command == "how r u":
+    elif command in ["how are you", "how r u"]:
 
         print("I'm Fine Sir.")
 
@@ -780,44 +781,25 @@ def execute_command(command):
         return result
 
 
+# ==========================================================
+# Check AI Commands
+#
+# If no local handler recognizes the command,
+# forward it to AI Handler.
+# ==========================================================
+
+    result = handle_ai_commands(command)
+
+    if result is not None:
+        return result
+
+
 
 #-------------------------------------------------------------------------------------------------
     
 
-# ==========================================================
-# AI FALLBACK
-#
-# If no local handler recognizes the command,
-# forward it to Gemini AI.
-# ==========================================================
 
-    answer, response_time, api_calls = ask_gemini(command)
 
-    if answer:
-
-        show_hud(
-            command=command,
-            command_type="AI",
-            status="SUCCESS",
-            response_time=response_time,
-            api_calls=api_calls
-        )
-
-        print(answer)
-        say(answer)
-
-    else:
-
-        show_hud(
-            command=command,
-            command_type="AI",
-            status="FAILED",
-            api_calls=api_calls
-        )
-
-        say("Sorry Sir, Gemini is unavailable right now. Please try again later.")
-
-    return True
 
 
 
