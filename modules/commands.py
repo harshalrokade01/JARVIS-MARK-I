@@ -68,6 +68,14 @@ from modules.command_handlers.brightness_handler import handle_brightness_comman
 
 from modules.command_handlers.battery_handler import handle_battery_commands
 
+from modules.command_handlers.weather_handler import handle_weather_commands
+
+from modules.command_handlers.browser_handler import handle_browser_commands
+
+from modules.command_handlers.media_handler import handle_media_commands
+
+from modules.command_handlers.weather_handler import handle_weather_commands
+
 
 
 
@@ -352,79 +360,6 @@ def handle_browser_commands(words, command):
     #command not handled
     return None
 
-
-# ==========================================================
-#                 WEATHER COMMAND HANDLER
-#
-# Purpose:
-# Handles all weather-related commands.
-#
-# Returns:
-#   True  -> Weather command executed
-#   None  -> Command not handled
-# ==========================================================
-
-def handle_weather_commands(words, command):
-
-    if not words:   
-        return None
-
-    # ------------------------------------------------------
-    # WEATHER COMMAND
-    # Example:
-    # weather pune
-    # weather mumbai
-    # ------------------------------------------------------    
-
-    if words[0] =="weather":
-
-        if len(words) > 1:
-
-            city = get_query(words)
-
-            #measure API response time
-            start_time = time.perf_counter()
-
-            result = get_weather(city)
-
-            end_time = time.perf_counter()
-
-            response_time = end_time - start_time
-
-            if result is None:
-
-                say("Sorry Sir, I couldn't find that city, Sir")
-
-            else:
-
-                city_name, temp, humidity, weather = result
-
-                show_hud(
-                    command=command,
-                    command_type="LOCAL",
-                    status="SUCCESS",
-                    response_time=response_time,
-                    extra=(
-                        f"City         : {city_name}\n"
-                        f"Temperature  : {temp:.1f}°C\n"
-                        f"Humidity     : {humidity}%\n"
-                        f"Weather      : {weather}"
-                    )
-                )
-
-                say(
-                    f"Sir, in {city_name}, the temperature is "
-                    f"{temp:.1f} degree Celsius with {weather}"
-
-                )
-        else:
-
-            say("Please tell me the city name, Sir.")
-
-        return True
-
-    #COMMAND NOT HANDLED
-    return None
 
 
 # ==========================================================

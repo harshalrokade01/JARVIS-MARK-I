@@ -6,6 +6,8 @@ import requests
 
 from dotenv import load_dotenv
 
+
+
 #.env loading
 load_dotenv()
 API_KEY = os.getenv("WEATHER_API_KEY")
@@ -19,6 +21,7 @@ def get_weather(city):
     response = requests.get(url)
 
     data = response.json()
+
 
     if data["cod"] != 200:
         return None
